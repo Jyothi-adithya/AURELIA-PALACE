@@ -1,4 +1,6 @@
+import { HelmetProvider } from 'react-helmet-async';
 import { BrowserRouter as Router, Routes, Route, Navigate } from 'react-router-dom';
+import ScrollToTop from './components/common/ScrollToTop';
 import { useAuth } from './hooks/useAuth';
 
 // Layouts
@@ -37,7 +39,9 @@ const ProtectedRoute = ({ children }) => {
 
 function App() {
   return (
+    <HelmetProvider>
     <Router>
+      <ScrollToTop />
       <Routes>
         {/* Public Routes with Layout */}
         <Route path="/" element={<PublicLayout />}>
@@ -74,6 +78,7 @@ function App() {
         </Route>
       </Routes>
     </Router>
+    </HelmetProvider>
   );
 }
 

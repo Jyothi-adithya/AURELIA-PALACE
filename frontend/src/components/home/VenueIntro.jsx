@@ -15,7 +15,7 @@ const VenueIntro = () => {
             className="w-full lg:w-1/2"
           >
             <div className="relative">
-              <img 
+              <img loading="lazy" 
                 src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" 
                 alt="Aurelia Palace Architecture" 
                 className="w-full aspect-[4/5] object-cover rounded-sm shadow-xl"

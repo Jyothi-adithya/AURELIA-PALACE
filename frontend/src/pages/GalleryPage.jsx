@@ -1,4 +1,4 @@
-import { useState, useMemo } from 'react';
+import { useState, useMemo, useEffect } from 'react';
 import { useFetch } from '../hooks/useFetch';
 import { galleryService } from '../services/galleryService';
 import Container from '../components/common/Container';
@@ -12,6 +12,14 @@ const GalleryPage = () => {
   const { data: items, loading, error } = useFetch(galleryService.getAll);
   const [activeCategory, setActiveCategory] = useState('All');
   const [selectedImage, setSelectedImage] = useState(null);
+  useEffect(() => {
+    const handleKeyDown = (e) => {
+      if (e.key === 'Escape' && selectedImage) setSelectedImage(null);
+    };
+    window.addEventListener('keydown', handleKeyDown);
+    return () => window.removeEventListener('keydown', handleKeyDown);
+  }, [selectedImage]);
+
 
   const categories = useMemo(() => {
     if (!items) return ['All'];
@@ -90,6 +98,7 @@ const GalleryPage = () => {
           <button 
             className="absolute top-6 right-6 text-white/70 hover:text-white"
             onClick={() => setSelectedImage(null)}
+            aria-label="Close lightbox"
           >
             <X size={32} />
           </button>

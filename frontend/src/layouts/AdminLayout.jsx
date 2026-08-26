@@ -25,7 +25,7 @@ const AdminLayout = () => {
       {/* Mobile sidebar toggle */}
       <div className="lg:hidden fixed top-0 left-0 right-0 h-16 bg-brand-charcoal text-white flex items-center justify-between px-4 z-50">
         <span className="font-serif text-xl text-brand-gold">Aurelia Admin</span>
-        <button onClick={() => setSidebarOpen(!sidebarOpen)}>
+        <button onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle sidebar" aria-expanded={sidebarOpen}>
           {sidebarOpen ? <X size={24} /> : <Menu size={24} />}
         </button>
       </div>

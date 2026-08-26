@@ -5,10 +5,12 @@ import EventTypesSection from '../components/home/EventTypesSection';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
 import Button from '../components/common/Button';
+import SEO from '../components/common/SEO';
 
 const HomePage = () => {
   return (
     <div>
+      <SEO title="Luxury Event Venue" description="Experience unparalleled luxury and meticulous service at Aurelia Palace." />
       <HeroSection />
       <VenueIntro />
       <EventTypesSection />

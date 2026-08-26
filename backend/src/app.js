@@ -28,6 +28,14 @@ if (env.NODE_ENV !== 'test') {
 // API Routes
 app.use('/api', routes);
 
+// 404 Handler for unknown API routes
+app.use('/api/*', (req, res) => {
+  res.status(404).json({
+    success: false,
+    message: 'API route not found'
+  });
+});
+
 // 404 handler
 app.use(notFound);
 

@@ -46,7 +46,7 @@ const ServicesPage = () => {
                     className="flex flex-col sm:flex-row gap-6 bg-white p-6 shadow-sm border border-gray-100 rounded-sm"
                   >
                     <div className="sm:w-1/3 shrink-0">
-                      <img 
+                      <img loading="lazy" 
                         src={service.image} 
                         alt={service.name} 
                         className="w-full aspect-square object-cover rounded-sm"

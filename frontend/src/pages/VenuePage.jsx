@@ -6,7 +6,7 @@ const VenuePage = () => {
   return (
     <div className="bg-brand-ivory pb-20">
       <div className="relative h-[60vh] flex items-center justify-center overflow-hidden mb-20">
-        <img 
+        <img loading="lazy" 
           src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1920&q=80" 
           alt="Aurelia Palace Exterior" 
           className="absolute inset-0 w-full h-full object-cover"
@@ -34,7 +34,7 @@ const VenuePage = () => {
             </div>
           </div>
           <div>
-            <img 
+            <img loading="lazy" 
               src="https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80" 
               alt="Architecture detail" 
               className="w-full aspect-[4/5] object-cover shadow-xl rounded-sm"

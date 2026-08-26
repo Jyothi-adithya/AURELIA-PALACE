@@ -34,7 +34,7 @@ const EventsPage = () => {
             >
               <div className="w-full md:w-1/2">
                 <Link to={`/events/${event.slug}`} className="block overflow-hidden relative aspect-[4/3] group">
-                  <img 
+                  <img loading="lazy" 
                     src={event.image} 
                     alt={event.name} 
                     className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
