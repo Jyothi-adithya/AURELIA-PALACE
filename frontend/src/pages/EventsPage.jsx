@@ -1,4 +1,5 @@
 import { useFetch } from '../hooks/useFetch';
+import SEO from '../components/common/SEO';
 import { eventService } from '../services/eventService';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
@@ -15,6 +16,7 @@ const EventsPage = () => {
 
   return (
     <div className="bg-brand-ivory py-20 min-h-screen">
+      <SEO title="Event Types" description="From intimate weddings to grand corporate galas, Aurelia Palace hosts every celebration with unparalleled luxury." />
       <Container>
         <SectionHeading 
           title="Celebrations We Host" 

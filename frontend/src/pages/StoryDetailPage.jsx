@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { storyService } from '../services/storyService';
+import SEO from '../components/common/SEO';
 import Container from '../components/common/Container';
 import Loader from '../components/common/Loader';
 import ErrorState from '../components/common/ErrorState';
@@ -15,6 +16,7 @@ const StoryDetailPage = () => {
 
   return (
     <div className="bg-brand-ivory pb-20">
+      <SEO title={story.title} description={story.excerpt.substring(0, 155)} />
       <div className="relative h-[60vh] flex items-end overflow-hidden mb-16">
         <img 
           src={story.coverImage} 

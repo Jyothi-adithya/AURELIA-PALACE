@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { eventService } from '../services/eventService';
+import SEO from '../components/common/SEO';
 import Container from '../components/common/Container';
 import Loader from '../components/common/Loader';
 import ErrorState from '../components/common/ErrorState';
@@ -16,6 +17,7 @@ const EventDetailPage = () => {
 
   return (
     <div className="bg-brand-ivory pb-20">
+      <SEO title={event.name} description={event.description.substring(0, 155)} />
       {/* Hero */}
       <div className="relative h-[60vh] flex items-end overflow-hidden mb-16">
         <img 

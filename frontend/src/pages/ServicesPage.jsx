@@ -1,4 +1,5 @@
 import { useFetch } from '../hooks/useFetch';
+import SEO from '../components/common/SEO';
 import { serviceService } from '../services/serviceService';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
@@ -22,6 +23,7 @@ const ServicesPage = () => {
 
   return (
     <div className="bg-brand-ivory py-20 min-h-screen">
+      <SEO title="Premium Services" description="Discover our curated premium services — from fine dining and florals to audiovisual production — all under one roof." />
       <Container>
         <SectionHeading 
           title="Premium Experiences" 

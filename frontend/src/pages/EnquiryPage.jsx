@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import SEO from '../components/common/SEO';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
@@ -71,6 +72,7 @@ const EnquiryPage = () => {
 
   return (
     <div className="py-20 bg-brand-ivory">
+      <SEO title="Plan Your Event" description="Submit an enquiry to start planning your dream event at Aurelia Palace. Our team will be in touch shortly." />
       <Container className="max-w-3xl">
         <SectionHeading 
           title="Plan Your Event" 

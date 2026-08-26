@@ -1,6 +1,7 @@
 import { useParams, Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
 import { spaceService } from '../services/spaceService';
+import SEO from '../components/common/SEO';
 import Container from '../components/common/Container';
 import Loader from '../components/common/Loader';
 import ErrorState from '../components/common/ErrorState';
@@ -19,6 +20,7 @@ const SpaceDetailPage = () => {
 
   return (
     <div className="bg-brand-ivory pb-20">
+      <SEO title={space.name} description={`${space.name} accommodates up to ${space.capacity} guests. ${space.description.substring(0, 100)}...`} />
       <div className="relative h-[60vh] flex items-end overflow-hidden mb-16">
         <img 
           src={space.image} 

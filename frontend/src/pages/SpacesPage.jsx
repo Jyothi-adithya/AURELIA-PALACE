@@ -1,4 +1,5 @@
 import { useFetch } from '../hooks/useFetch';
+import SEO from '../components/common/SEO';
 import { spaceService } from '../services/spaceService';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
@@ -15,6 +16,7 @@ const SpacesPage = () => {
 
   return (
     <div className="bg-brand-ivory py-20 min-h-screen">
+      <SEO title="Our Spaces" description="Explore our signature event spaces — from the Grand Ballroom to the Garden Pavilion — each designed for magnificence." />
       <Container>
         <SectionHeading 
           title="Our Venues" 

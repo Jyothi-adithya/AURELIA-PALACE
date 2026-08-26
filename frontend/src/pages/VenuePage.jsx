@@ -1,10 +1,12 @@
 import Container from '../components/common/Container';
+import SEO from '../components/common/SEO';
 import SectionHeading from '../components/common/SectionHeading';
 import Button from '../components/common/Button';
 
 const VenuePage = () => {
   return (
     <div className="bg-brand-ivory pb-20">
+      <SEO title="The Venue" description="Nestled in the heritage district, Aurelia Palace is a timeless masterpiece for extraordinary events and celebrations." />
       <div className="relative h-[60vh] flex items-center justify-center overflow-hidden mb-20">
         <img loading="lazy" 
           src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=1920&q=80" 

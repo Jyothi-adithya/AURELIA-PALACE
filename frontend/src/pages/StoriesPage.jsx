@@ -1,4 +1,5 @@
 import { useFetch } from '../hooks/useFetch';
+import SEO from '../components/common/SEO';
 import { storyService } from '../services/storyService';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
@@ -15,6 +16,7 @@ const StoriesPage = () => {
 
   return (
     <div className="bg-brand-ivory py-20 min-h-screen">
+      <SEO title="Stories" description="Read real stories of celebrations, love, and unforgettable moments hosted at Aurelia Palace." />
       <Container>
         <SectionHeading 
           title="Tales of Elegance" 

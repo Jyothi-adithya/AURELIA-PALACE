@@ -1,4 +1,5 @@
 import { useState, useMemo, useEffect } from 'react';
+import SEO from '../components/common/SEO';
 import { useFetch } from '../hooks/useFetch';
 import { galleryService } from '../services/galleryService';
 import Container from '../components/common/Container';
@@ -38,6 +39,7 @@ const GalleryPage = () => {
 
   return (
     <div className="bg-brand-ivory py-20 min-h-screen">
+      <SEO title="Gallery" description="Browse our curated portfolio of weddings, galas, and corporate events held at Aurelia Palace." />
       <Container>
         <SectionHeading 
           title="A Glimpse of Magic" 
