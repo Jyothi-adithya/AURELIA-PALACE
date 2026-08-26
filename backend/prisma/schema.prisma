@@ -1,0 +1,101 @@
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mysql"
+  url      = env("DATABASE_URL")
+}
+
+model EventType {
+  id           Int           @id @default(autoincrement())
+  name         String
+  slug         String        @unique
+  description  String        @db.Text
+  image        String
+  featured     Boolean       @default(false)
+  createdAt    DateTime      @default(now())
+  updatedAt    DateTime      @updatedAt
+  enquiries    Enquiry[]
+  galleryItems GalleryItem[]
+}
+
+model Space {
+  id            Int      @id @default(autoincrement())
+  name          String
+  slug          String   @unique
+  description   String   @db.Text
+  capacity      Int
+  features      Json
+  image         String
+  galleryImages Json
+  featured      Boolean  @default(false)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Service {
+  id          Int      @id @default(autoincrement())
+  name        String
+  slug        String   @unique
+  description String   @db.Text
+  category    String
+  image       String
+  active      Boolean  @default(true)
+  createdAt   DateTime @default(now())
+  updatedAt   DateTime @updatedAt
+}
+
+model GalleryItem {
+  id          Int        @id @default(autoincrement())
+  title       String
+  category    String
+  image       String
+  caption     String?
+  eventTypeId Int?
+  eventType   EventType? @relation(fields: [eventTypeId], references: [id])
+  createdAt   DateTime   @default(now())
+}
+
+model Story {
+  id            Int      @id @default(autoincrement())
+  title         String
+  slug          String   @unique
+  excerpt       String   @db.Text
+  content       String   @db.LongText
+  coverImage    String
+  publishedDate DateTime
+  published     Boolean  @default(true)
+  createdAt     DateTime @default(now())
+  updatedAt     DateTime @updatedAt
+}
+
+model Enquiry {
+  id          Int           @id @default(autoincrement())
+  name        String
+  email       String
+  phone       String
+  eventTypeId Int
+  eventType   EventType     @relation(fields: [eventTypeId], references: [id])
+  eventDate   DateTime
+  guestCount  Int
+  message     String        @db.Text
+  status      EnquiryStatus @default(NEW)
+  createdAt   DateTime      @default(now())
+  updatedAt   DateTime      @updatedAt
+}
+
+model AdminUser {
+  id           Int      @id @default(autoincrement())
+  name         String
+  email        String   @unique
+  passwordHash String
+  createdAt    DateTime @default(now())
+  updatedAt    DateTime @updatedAt
+}
+
+enum EnquiryStatus {
+  NEW
+  CONTACTED
+  CLOSED
+}
