@@ -28,8 +28,8 @@ if (env.NODE_ENV !== 'test') {
 // API Routes
 app.use('/api', routes);
 
-// 404 handler for unknown /api/* routes
-app.use('/api/*', (req, res) => {
+// 404 handler for unknown /api/* routes — Express 5 requires named wildcard
+app.use('/api/{*path}', (req, res) => {
   res.status(404).json({
     success: false,
     message: 'API route not found',
