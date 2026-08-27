@@ -34,8 +34,7 @@ const EventTypesSection = () => {
               >
                 <Link
                   to={`/events/${event.slug}`}
-                  className="group relative block overflow-hidden"
-                  style={{ aspectRatio: i === 0 ? '4/5' : '4/3.5' }}
+                  className="group relative block overflow-hidden aspect-[4/3]"
                 >
                   <img
                     src={event.image}

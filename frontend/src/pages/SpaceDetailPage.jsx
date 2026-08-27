@@ -58,7 +58,9 @@ const SpaceDetailPage = () => {
                 <h3 className="text-2xl font-serif text-brand-charcoal mb-6">Gallery</h3>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4">
                   {gallery.map((img, i) => (
-                    <img key={i} src={img} alt={`${space.name} view ${i + 1}`} className="w-full h-64 object-cover rounded-sm shadow-sm" />
+                    <div key={i} className="aspect-[4/3] overflow-hidden">
+                      <img src={img} alt={`${space.name} view ${i + 1}`} className="w-full h-full object-cover" />
+                    </div>
                   ))}
                 </div>
               </div>

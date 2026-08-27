@@ -39,7 +39,7 @@ const EventsPage = () => {
             className="mb-24 last:mb-0"
           >
             <Container>
-              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${i % 2 === 1 ? 'lg:flex lg:flex-row-reverse' : ''}`}>
+              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${i % 2 === 1 ? 'lg:[&>*:first-child]:order-2 lg:[&>*:last-child]:order-1' : ''}`}>
                 {/* Image */}
                 <Link to={`/events/${event.slug}`} className="group block img-hover overflow-hidden aspect-[4/3]">
                   <img

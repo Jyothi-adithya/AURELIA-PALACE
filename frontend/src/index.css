@@ -57,9 +57,9 @@
     @apply bg-brand-stone/40 rounded-sm overflow-hidden relative;
     background: linear-gradient(
       90deg,
-      theme('colors.brand.stone / 40%') 25%,
+      theme('colors.brand.stone / 30%') 0%,
       theme('colors.brand.ivory-dark') 50%,
-      theme('colors.brand.stone / 40%') 75%
+      theme('colors.brand.stone / 30%') 100%
     );
     background-size: 200% 100%;
     animation: shimmer 1.6s ease-in-out infinite;

@@ -45,22 +45,22 @@ const Field = ({ label, error, type = 'text', children, ...props }) => {
 
 const EnquiryPage = () => {
   const { data: eventTypes, loading: eventsLoading } = useFetch(eventService.getAll);
-  const [status, setStatus] = useState({ loading: false, success: false, error: null });
+  const [status, setStatus] = useState({ loading: false, success: false, error: null, emailSent: false });
 
   const { register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data) => {
-    setStatus({ loading: true, success: false, error: null });
+    setStatus({ loading: true, success: false, error: null, emailSent: false });
     try {
-      await enquiryService.submit({
+      const result = await enquiryService.submit({
         ...data,
         eventTypeId: parseInt(data.eventTypeId, 10),
         guestCount:  parseInt(data.guestCount, 10),
       });
-      setStatus({ loading: false, success: true, error: null });
+      setStatus({ loading: false, success: true, error: null, emailSent: !!result?.emailSent });
       reset();
     } catch (err) {
-      setStatus({ loading: false, success: false, error: err.response?.data?.message || 'Something went wrong. Please try again.' });
+      setStatus({ loading: false, success: false, error: err.response?.data?.message || 'Something went wrong. Please try again.', emailSent: false });
     }
   };
 
@@ -100,9 +100,12 @@ const EnquiryPage = () => {
             <CheckCircle2 size={48} className="text-brand-gold mx-auto mb-6" />
             <h2 className="font-serif text-display-md text-brand-charcoal mb-4">Enquiry Received</h2>
             <p className="text-brand-muted font-light max-w-sm mx-auto mb-10">
-              Thank you for reaching out to Aurelia Palace. Our events team will review your enquiry and contact you shortly.
+              {status.emailSent
+                ? 'Thank you for reaching out to Aurelia Palace. A confirmation email has been sent to your email address. Our events team will contact you shortly.'
+                : 'Thank you for reaching out to Aurelia Palace. Our events team will review your enquiry and contact you shortly.'
+              }
             </p>
-            <Button onClick={() => setStatus({ loading: false, success: false, error: null })} variant="outline">
+            <Button onClick={() => setStatus({ loading: false, success: false, error: null, emailSent: false })} variant="outline">
               Submit Another Enquiry
             </Button>
           </motion.div>

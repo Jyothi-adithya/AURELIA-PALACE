@@ -21,7 +21,7 @@ const HomePage = () => (
     <HeroSection />
 
     {/* Stats ticker */}
-    <div className="bg-brand-charcoal-light border-t border-white/5">
+    <div className="bg-brand-charcoal border-t border-white/5">
       <Container>
         <div className="grid grid-cols-2 lg:grid-cols-4 divide-x divide-white/10">
           {stats.map((s, i) => (
@@ -31,10 +31,10 @@ const HomePage = () => (
               whileInView={{ opacity: 1, y: 0 }}
               viewport={{ once: true }}
               transition={{ delay: i * 0.1, duration: 0.5 }}
-              className="py-8 px-6 text-center"
+              className="py-10 px-6 text-center"
             >
               <p className="font-serif text-3xl text-brand-gold mb-1">{s.value}</p>
-              <p className="text-[0.65rem] uppercase tracking-widest text-white/40">{s.label}</p>
+              <p className="text-[0.65rem] uppercase tracking-widest text-white/60">{s.label}</p>
             </motion.div>
           ))}
         </div>

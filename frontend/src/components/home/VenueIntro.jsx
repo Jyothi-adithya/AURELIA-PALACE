@@ -14,7 +14,7 @@ const VenueIntro = () => (
     <Container>
       <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
         {/* Image block */}
-        <motion.div {...fadeUp(0)} className="relative">
+        <motion.div {...fadeUp(0)} className="relative mb-10 lg:mb-0">
           <div className="img-hover aspect-[3/4] max-w-md mx-auto lg:mx-0">
             <img
               src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=85"
@@ -26,7 +26,7 @@ const VenueIntro = () => (
           {/* Floating stat badge */}
           <motion.div
             {...fadeUp(0.4)}
-            className="absolute -bottom-6 -right-0 lg:-right-8 bg-white p-6 shadow-sm border-l-2 border-brand-gold max-w-[180px]"
+            className="absolute -bottom-6 right-0 lg:-right-8 bg-white p-6 shadow-sm border-l-2 border-brand-gold max-w-[180px]"
           >
             <p className="font-serif text-4xl text-brand-charcoal mb-1">25+</p>
             <p className="text-xs text-brand-muted font-light leading-snug uppercase tracking-wide">Years of Extraordinary Events</p>

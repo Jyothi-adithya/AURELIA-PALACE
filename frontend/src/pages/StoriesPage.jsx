@@ -39,7 +39,7 @@ const StoriesPage = () => {
             className="mb-16"
           >
             <Link to={`/stories/${featured.slug}`} className="group grid grid-cols-1 md:grid-cols-2 gap-0 bg-white overflow-hidden border border-brand-stone/30">
-              <div className="img-hover overflow-hidden aspect-[4/3] md:aspect-auto">
+              <div className="img-hover overflow-hidden aspect-[4/3]">
                 <img src={featured.coverImage} alt={featured.title} className="w-full h-full object-cover" loading="lazy" />
               </div>
               <div className="p-10 flex flex-col justify-center">

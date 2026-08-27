@@ -49,10 +49,9 @@ const FeaturedSpaces = () => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true, margin: '-60px' }}
                 transition={{ duration: 0.6, delay: i * 0.1, ease: [0.25, 0.1, 0.25, 1] }}
-                className={i === 0 ? 'md:col-span-2' : ''}
               >
                 <Link to={`/spaces/${space.slug}`} className="group block bg-white overflow-hidden h-full">
-                  <div className="img-hover overflow-hidden" style={{ aspectRatio: i === 0 ? '16/9' : '4/3' }}>
+                  <div className="img-hover overflow-hidden aspect-[4/3]">
                     <img
                       src={space.image}
                       alt={space.name}

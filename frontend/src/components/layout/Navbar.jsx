@@ -20,7 +20,7 @@ const Navbar = () => {
   const location = useLocation();
 
   // Is this a page with a hero? Use transparent navbar on hero pages
-  const heroPages = ['/', '/venue', '/events', '/spaces', '/gallery', '/stories'];
+  const heroPages = ['/', '/venue', '/events', '/spaces', '/services', '/gallery', '/stories', '/enquiry'];
   const isHeroPage = heroPages.some(p =>
     p === '/' ? location.pathname === '/' : location.pathname.startsWith(p)
   );

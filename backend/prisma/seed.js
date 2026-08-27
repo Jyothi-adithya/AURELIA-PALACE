@@ -59,7 +59,7 @@ async function main() {
       name: 'Private Celebrations',
       slug: 'private-celebrations',
       description: 'From milestone birthdays to exclusive anniversaries, celebrate your private events with unmatched elegance.',
-      image: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1533174000273-e1f4ceb6bf8e?w=1200&q=80',
       featured: true,
     },
     {
@@ -123,7 +123,7 @@ async function main() {
       description: 'A chic rooftop venue offering stunning views. A wonderful choice for cocktail hours, exclusive parties, and modern celebrations.',
       capacity: 150,
       features: ['Rooftop View', 'Cocktail Bar', 'Lounge Seating', 'Ambient Lighting'],
-      image: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1582103287241-2762adba6c36?w=1200&q=80',
       galleryImages: [],
       featured: true,
     },
@@ -185,7 +185,7 @@ async function main() {
       slug: 'venue-styling',
       description: 'Transformative lighting, draping, and architectural enhancements for any theme.',
       category: 'Decor',
-      image: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?w=1200&q=80',
+      image: 'https://images.unsplash.com/photo-1478146896981-b80fe463b330?w=1200&q=80',
       active: true,
     },
   ];
@@ -211,12 +211,12 @@ async function main() {
     { title: 'Garden Ceremony', category: 'Weddings', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80', caption: 'An outdoor vow exchange.', eventTypeId: weddings?.id },
     { title: 'Champagne Toast', category: 'Receptions', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80', caption: 'Celebrating the newlyweds.', eventTypeId: receptions?.id },
     { title: 'Intimate Lounge', category: 'Architecture', image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80', caption: 'Cozy seating area.', eventTypeId: null },
-    { title: 'Evening Lights', category: 'Celebrations', image: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?w=800&q=80', caption: 'The terrace at dusk.', eventTypeId: null },
+    { title: 'Evening Lights', category: 'Celebrations', image: 'https://images.unsplash.com/photo-1582103287241-2762adba6c36?w=800&q=80', caption: 'The terrace at dusk.', eventTypeId: null },
     { title: 'Culinary Masterpiece', category: 'Catering', image: 'https://images.unsplash.com/photo-1555244162-803834f70033?w=800&q=80', caption: 'Gourmet appetizers.', eventTypeId: null },
     { title: 'Corporate Setup', category: 'Corporate', image: 'https://images.unsplash.com/photo-1511578314322-379afb476865?w=800&q=80', caption: 'Conference in the Ivory Suite.', eventTypeId: null },
     { title: 'Floral Arch', category: 'Weddings', image: 'https://images.unsplash.com/photo-1519225421980-715cb0215aed?w=800&q=80', caption: 'Custom floral design.', eventTypeId: weddings?.id },
     { title: 'First Dance', category: 'Receptions', image: 'https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80', caption: 'Magical moments in the Ballroom.', eventTypeId: receptions?.id },
-    { title: 'Gala Dinner', category: 'Corporate', image: 'https://images.unsplash.com/photo-1530103862676-de8892bc952f?w=800&q=80', caption: 'Annual corporate gala.', eventTypeId: null },
+    { title: 'Gala Dinner', category: 'Corporate', image: 'https://images.unsplash.com/photo-1533174000273-e1f4ceb6bf8e?w=800&q=80', caption: 'Annual corporate gala.', eventTypeId: null },
     { title: 'Bridal Suite', category: 'Architecture', image: 'https://images.unsplash.com/photo-1515934751635-c81c6bc9a2d8?w=800&q=80', caption: 'Private preparation room.', eventTypeId: null },
   ];
 
