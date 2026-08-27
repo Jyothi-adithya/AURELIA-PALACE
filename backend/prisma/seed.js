@@ -7,7 +7,13 @@ async function main() {
   console.log('Seeding database...');
 
   // 1. Admin User
-  const passwordHash = await bcrypt.hash('admin123', 12);
+  // In production, set ADMIN_SEED_PASSWORD in your environment before running seed.
+  // Default 'admin123' is for local development only — CHANGE THIS before going live.
+  const seedPassword = process.env.ADMIN_SEED_PASSWORD || 'admin123';
+  if (process.env.NODE_ENV === 'production' && !process.env.ADMIN_SEED_PASSWORD) {
+    throw new Error('FATAL: Set ADMIN_SEED_PASSWORD env var before seeding in production.');
+  }
+  const passwordHash = await bcrypt.hash(seedPassword, 12);
   const admin = await prisma.adminUser.upsert({
     where: { email: 'admin@aureliapalace.com' },
     update: {},

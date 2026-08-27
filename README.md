@@ -71,12 +71,13 @@ npm run dev
 
 ---
 
-## Admin Credentials
-By default, the seed script provisions the following admin user:
-- **Email:** `admin@aureliapalace.com`
-- **Password:** `admin123`
+## Admin Access
 
-You can log in at `http://localhost:5173/admin/login` to view the dashboard and manage incoming enquiries.
+The seed script creates an admin account at `admin@aureliapalace.com`.
+
+**Local development:** The seed uses `admin123` by default. You can log in at `http://localhost:5173/admin/login`.
+
+**Production:** Set the `ADMIN_SEED_PASSWORD` environment variable to a strong, unique password before running the seed script. The seed will refuse to run without it if `NODE_ENV=production`.
 
 ## Deployment Notes
 - **Frontend** is configured to be deployed on platforms like **Vercel** or **Netlify**. Run `npm run build` to generate static assets.

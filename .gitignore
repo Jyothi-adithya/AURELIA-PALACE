@@ -1,8 +1,10 @@
+# Root-level gitignore — covers files at the repo root
 node_modules
-dist
 .env
 .env.local
 .env.production
 .env.*.local
 *.log
 npm-debug.log*
+.DS_Store
+Thumbs.db

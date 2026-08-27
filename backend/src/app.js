@@ -20,26 +20,26 @@ app.use(cors({
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
-// Logging
+// Logging — 'combined' (Apache format) in production for log aggregators, 'dev' locally
 if (env.NODE_ENV !== 'test') {
-  app.use(morgan('dev'));
+  app.use(morgan(env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 }
 
 // API Routes
 app.use('/api', routes);
 
-// 404 Handler for unknown API routes
+// 404 handler for unknown /api/* routes
 app.use('/api/*', (req, res) => {
   res.status(404).json({
     success: false,
-    message: 'API route not found'
+    message: 'API route not found',
   });
 });
 
-// 404 handler
+// General 404 handler
 app.use(notFound);
 
-// Centralized error handler
+// Centralised error handler
 app.use(errorHandler);
 
 module.exports = app;

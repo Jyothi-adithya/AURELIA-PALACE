@@ -1,7 +1,16 @@
 import axios from 'axios';
 
+const apiBaseUrl = import.meta.env.VITE_API_BASE_URL;
+
+if (!apiBaseUrl) {
+  console.error(
+    '[api] VITE_API_BASE_URL is not set. All API requests will fail. ' +
+    'Create a .env file with VITE_API_BASE_URL=http://localhost:5000/api'
+  );
+}
+
 const api = axios.create({
-  baseURL: import.meta.env.VITE_API_BASE_URL,
+  baseURL: apiBaseUrl,
 });
 
 // Request Interceptor: Attach Token

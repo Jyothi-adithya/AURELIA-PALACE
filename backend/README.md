@@ -44,7 +44,7 @@ This is the Node.js/Express.js backend for the Aurelia Palace full-stack website
    ```bash
    npm run seed
    ```
-   *Note: The default admin account is `admin@aureliapalace.com` / `admin123`.*
+   *Note: The default admin account is `admin@aureliapalace.com`. For production seeding, set the `ADMIN_SEED_PASSWORD` environment variable.*
 
 5. **Start the Server**
    ```bash
