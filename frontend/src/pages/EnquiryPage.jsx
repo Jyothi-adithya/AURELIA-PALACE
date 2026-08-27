@@ -1,158 +1,150 @@
 import { useState } from 'react';
-import SEO from '../components/common/SEO';
 import { useForm } from 'react-hook-form';
 import { zodResolver } from '@hookform/resolvers/zod';
 import * as z from 'zod';
+import { motion } from 'framer-motion';
+import { CheckCircle2 } from 'lucide-react';
 import { useFetch } from '../hooks/useFetch';
 import { eventService } from '../services/eventService';
 import { enquiryService } from '../services/enquiryService';
 import Container from '../components/common/Container';
-import SectionHeading from '../components/common/SectionHeading';
-import FormField from '../components/common/FormField';
-import Button from '../components/common/Button';
+import SEO from '../components/common/SEO';
 import Loader from '../components/common/Loader';
-import { CheckCircle2 } from 'lucide-react';
-import { motion } from 'framer-motion';
+import Button from '../components/common/Button';
 
-const enquirySchema = z.object({
-  name: z.string().min(2, 'Name is required'),
-  email: z.string().email('Valid email is required'),
-  phone: z.string().min(10, 'Valid phone number is required'),
+const schema = z.object({
+  name:        z.string().min(2, 'Full name is required'),
+  email:       z.string().email('A valid email address is required'),
+  phone:       z.string().min(10, 'A valid phone number is required'),
   eventTypeId: z.string().min(1, 'Please select an event type'),
-  eventDate: z.string().min(1, 'Event date is required'),
-  guestCount: z.string().refine((val) => parseInt(val) > 0, { message: 'Guest count must be positive' }),
-  message: z.string().min(10, 'Message must be at least 10 characters').max(2000),
+  eventDate:   z.string().min(1, 'Please select an event date'),
+  guestCount:  z.string().refine(v => parseInt(v) > 0, { message: 'Guest count must be at least 1' }),
+  message:     z.string().min(10, 'Please provide at least 10 characters').max(2000),
 });
+
+const Field = ({ label, error, type = 'text', children, ...props }) => {
+  const base = "w-full px-0 py-3 bg-transparent border-0 border-b font-light text-brand-charcoal placeholder-brand-stone focus:outline-none transition-colors duration-300 text-[0.9375rem]";
+  const borderClass = error ? "border-red-400 focus:border-red-500" : "border-brand-stone focus:border-brand-charcoal";
+
+  return (
+    <div className="flex flex-col gap-1.5 w-full">
+      <label className="text-[0.65rem] font-semibold tracking-widest uppercase text-brand-muted">
+        {label}
+      </label>
+      {type === 'textarea' ? (
+        <textarea className={`${base} ${borderClass} min-h-[110px] resize-none`} {...props} />
+      ) : type === 'select' ? (
+        <select className={`${base} ${borderClass} cursor-pointer`} {...props}>{children}</select>
+      ) : (
+        <input type={type} className={`${base} ${borderClass}`} {...props} />
+      )}
+      {error && <span className="text-red-500 text-xs font-medium mt-0.5">{error.message}</span>}
+    </div>
+  );
+};
 
 const EnquiryPage = () => {
   const { data: eventTypes, loading: eventsLoading } = useFetch(eventService.getAll);
-  const [submitStatus, setSubmitStatus] = useState({ loading: false, success: false, error: null });
+  const [status, setStatus] = useState({ loading: false, success: false, error: null });
 
-  const { register, handleSubmit, formState: { errors }, reset } = useForm({
-    resolver: zodResolver(enquirySchema)
-  });
+  const { register, handleSubmit, formState: { errors }, reset } = useForm({ resolver: zodResolver(schema) });
 
   const onSubmit = async (data) => {
-    setSubmitStatus({ loading: true, success: false, error: null });
+    setStatus({ loading: true, success: false, error: null });
     try {
-      // Format data for backend
-      const payload = {
+      await enquiryService.submit({
         ...data,
         eventTypeId: parseInt(data.eventTypeId, 10),
-        guestCount: parseInt(data.guestCount, 10)
-      };
-      
-      await enquiryService.submit(payload);
-      setSubmitStatus({ loading: false, success: true, error: null });
+        guestCount:  parseInt(data.guestCount, 10),
+      });
+      setStatus({ loading: false, success: true, error: null });
       reset();
-    } catch (error) {
-      const errorMsg = error.response?.data?.message || 'Something went wrong. Please try again.';
-      setSubmitStatus({ loading: false, success: false, error: errorMsg });
+    } catch (err) {
+      setStatus({ loading: false, success: false, error: err.response?.data?.message || 'Something went wrong. Please try again.' });
     }
   };
 
-  if (submitStatus.success) {
-    return (
-      <div className="min-h-[70vh] flex items-center justify-center py-20 bg-brand-ivory">
-        <Container className="text-center max-w-lg">
-          <motion.div initial={{ scale: 0.8, opacity: 0 }} animate={{ scale: 1, opacity: 1 }}>
-            <CheckCircle2 size={64} className="text-green-600 mx-auto mb-6" />
-            <h2 className="text-4xl font-serif text-brand-charcoal mb-4">Enquiry Received</h2>
-            <p className="text-gray-600 mb-8">
-              Thank you for reaching out to Aurelia Palace. Our team has received your enquiry and will be in touch shortly to discuss your extraordinary event.
+  return (
+    <div className="bg-brand-ivory min-h-screen">
+      <SEO title="Plan Your Event" description="Submit an enquiry to start planning your dream event at Aurelia Palace." />
+
+      {/* Hero */}
+      <div className="pt-36 pb-20 bg-brand-charcoal text-center">
+        <motion.p
+          initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }}
+          className="label-xs mb-4"
+        >
+          Enquiry
+        </motion.p>
+        <span className="gold-rule mx-auto mb-7 block" />
+        <motion.h1
+          initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }}
+          className="font-serif text-display-xl text-white"
+        >
+          Plan Your Event
+        </motion.h1>
+        <motion.p
+          initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 0.5 }}
+          className="mt-5 text-white/50 font-light max-w-md mx-auto text-sm leading-loose"
+        >
+          Tell us about your vision. Our team will be in touch within 24 hours.
+        </motion.p>
+      </div>
+
+      <Container className="max-w-3xl -mt-0 py-20">
+        {status.success ? (
+          <motion.div
+            initial={{ opacity: 0, scale: 0.96 }} animate={{ opacity: 1, scale: 1 }}
+            className="text-center py-20"
+          >
+            <CheckCircle2 size={48} className="text-brand-gold mx-auto mb-6" />
+            <h2 className="font-serif text-display-md text-brand-charcoal mb-4">Enquiry Received</h2>
+            <p className="text-brand-muted font-light max-w-sm mx-auto mb-10">
+              Thank you for reaching out to Aurelia Palace. Our events team will review your enquiry and contact you shortly.
             </p>
-            <Button onClick={() => setSubmitStatus({ loading: false, success: false, error: null })}>
+            <Button onClick={() => setStatus({ loading: false, success: false, error: null })} variant="outline">
               Submit Another Enquiry
             </Button>
           </motion.div>
-        </Container>
-      </div>
-    );
-  }
+        ) : eventsLoading ? (
+          <Loader />
+        ) : (
+          <form onSubmit={handleSubmit(onSubmit)} className="space-y-0">
+            {status.error && (
+              <div className="bg-red-50 border border-red-200 text-red-600 p-4 text-sm mb-8">
+                {status.error}
+              </div>
+            )}
 
-  return (
-    <div className="py-20 bg-brand-ivory">
-      <SEO title="Plan Your Event" description="Submit an enquiry to start planning your dream event at Aurelia Palace. Our team will be in touch shortly." />
-      <Container className="max-w-3xl">
-        <SectionHeading 
-          title="Plan Your Event" 
-          subtitle="Enquiry Form" 
-          centered 
-        />
-        
-        <div className="bg-white p-8 md:p-12 shadow-sm rounded-sm">
-          {submitStatus.error && (
-            <div className="bg-red-50 text-red-600 p-4 rounded-sm mb-6 text-sm font-medium">
-              {submitStatus.error}
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-x-10 gap-y-8 mb-8">
+              <Field label="Full Name" placeholder="Jane Doe" error={errors.name} {...register('name')} />
+              <Field label="Email Address" type="email" placeholder="jane@example.com" error={errors.email} {...register('email')} />
+              <Field label="Phone Number" placeholder="+1 (234) 567-8900" error={errors.phone} {...register('phone')} />
+              <Field label="Number of Guests" type="number" placeholder="150" error={errors.guestCount} {...register('guestCount')} />
+              <Field label="Event Type" type="select" error={errors.eventTypeId} {...register('eventTypeId')}>
+                <option value="">Select an event type</option>
+                {eventTypes?.map(et => (
+                  <option key={et.id} value={et.id}>{et.name}</option>
+                ))}
+              </Field>
+              <Field label="Preferred Date" type="date" error={errors.eventDate} {...register('eventDate')} />
             </div>
-          )}
-          
-          {eventsLoading ? (
-            <Loader text="Loading form..." />
-          ) : (
-            <form onSubmit={handleSubmit(onSubmit)} className="space-y-6">
-              <div className="grid grid-cols-1 md:grid-cols-2 gap-6">
-                <FormField 
-                  label="Full Name" 
-                  placeholder="John Doe"
-                  error={errors.name}
-                  {...register('name')}
-                />
-                <FormField 
-                  label="Email Address" 
-                  type="email"
-                  placeholder="john@example.com"
-                  error={errors.email}
-                  {...register('email')}
-                />
-                <FormField 
-                  label="Phone Number" 
-                  placeholder="+1 (234) 567-8900"
-                  error={errors.phone}
-                  {...register('phone')}
-                />
-                <FormField 
-                  label="Guest Count" 
-                  type="number"
-                  placeholder="150"
-                  error={errors.guestCount}
-                  {...register('guestCount')}
-                />
-                <FormField 
-                  label="Event Type" 
-                  type="select"
-                  error={errors.eventTypeId}
-                  {...register('eventTypeId')}
-                >
-                  <option value="">Select an Event Type</option>
-                  {eventTypes?.map(et => (
-                    <option key={et.id} value={et.id}>{et.name}</option>
-                  ))}
-                </FormField>
-                <FormField 
-                  label="Target Date" 
-                  type="date"
-                  error={errors.eventDate}
-                  {...register('eventDate')}
-                />
-              </div>
-              
-              <FormField 
-                label="Additional Details" 
-                type="textarea"
-                placeholder="Tell us a bit about your vision..."
-                error={errors.message}
-                {...register('message')}
-              />
-              
-              <div className="pt-4 text-center">
-                <Button type="submit" size="lg" className="w-full md:w-auto" isLoading={submitStatus.loading}>
-                  Submit Enquiry
-                </Button>
-              </div>
-            </form>
-          )}
-        </div>
+
+            <Field
+              label="Tell Us About Your Vision"
+              type="textarea"
+              placeholder="Describe your ideal event — theme, expectations, any special requirements…"
+              error={errors.message}
+              {...register('message')}
+            />
+
+            <div className="pt-12 flex justify-start">
+              <Button type="submit" variant="primary" size="lg" isLoading={status.loading}>
+                Submit Enquiry
+              </Button>
+            </div>
+          </form>
+        )}
       </Container>
     </div>
   );

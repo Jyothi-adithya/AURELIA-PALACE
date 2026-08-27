@@ -1,64 +1,95 @@
 import { Link } from 'react-router-dom';
 import Container from '../common/Container';
 
-const Footer = () => {
-  return (
-    <footer className="bg-brand-charcoal text-brand-ivory pt-20 pb-10">
+const col1 = [
+  { name: 'The Venue',    path: '/venue' },
+  { name: 'Event Types',  path: '/events' },
+  { name: 'Our Spaces',   path: '/spaces' },
+  { name: 'Services',     path: '/services' },
+  { name: 'Gallery',      path: '/gallery' },
+  { name: 'Our Stories',  path: '/stories' },
+];
+
+const col2 = [
+  { name: 'Submit an Enquiry', path: '/enquiry' },
+  { name: 'Admin Portal',      path: '/admin/login' },
+];
+
+const Footer = () => (
+  <footer className="bg-brand-charcoal text-white">
+    {/* Top band */}
+    <div className="border-b border-white/10">
       <Container>
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12 mb-16">
-          {/* Brand */}
-          <div className="col-span-1 lg:col-span-1">
-            <Link to="/" className="text-3xl font-serif text-brand-gold flex items-center gap-2 mb-6">
-              ❖ Aurelia
+        <div className="py-20 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-12 gap-12 lg:gap-8">
+          {/* Brand block */}
+          <div className="lg:col-span-5">
+            <Link to="/" className="font-serif text-3xl text-white inline-block mb-6">
+              Aurelia <span className="text-brand-gold italic">Palace</span>
             </Link>
-            <p className="text-gray-400 text-sm leading-relaxed mb-6">
-              A destination for celebrations that deserve more than a venue. Experience unparalleled luxury and meticulous service.
+            <p className="text-white/50 text-sm font-light leading-loose max-w-xs">
+              A destination for celebrations that deserve more than a venue. Experience unparalleled luxury and meticulous service in the heart of the heritage district.
             </p>
+            <div className="mt-8">
+              <p className="label-xs text-brand-gold/70 mb-2">Contact</p>
+              <a href="mailto:enquiries@aureliapalace.com" className="text-white/60 text-sm hover:text-brand-gold transition-colors duration-300 block mb-1">
+                enquiries@aureliapalace.com
+              </a>
+              <a href="tel:+12345678900" className="text-white/60 text-sm hover:text-brand-gold transition-colors duration-300">
+                +1 (234) 567-8900
+              </a>
+            </div>
           </div>
 
-          {/* Quick Links */}
-          <div>
-            <h4 className="text-lg font-serif mb-6 text-white">Explore</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li><Link to="/venue" className="hover:text-brand-gold transition-colors">The Venue</Link></li>
-              <li><Link to="/events" className="hover:text-brand-gold transition-colors">Event Types</Link></li>
-              <li><Link to="/spaces" className="hover:text-brand-gold transition-colors">Our Spaces</Link></li>
-              <li><Link to="/gallery" className="hover:text-brand-gold transition-colors">Gallery</Link></li>
-              <li><Link to="/stories" className="hover:text-brand-gold transition-colors">Stories</Link></li>
+          {/* Nav columns */}
+          <div className="lg:col-span-3">
+            <p className="label-xs text-brand-gold/60 mb-6">Explore</p>
+            <ul className="space-y-3">
+              {col1.map(l => (
+                <li key={l.name}>
+                  <Link to={l.path} className="text-sm text-white/50 hover:text-white transition-colors duration-300">
+                    {l.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Contact */}
-          <div>
-            <h4 className="text-lg font-serif mb-6 text-white">Contact</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li>123 Royal Boulevard</li>
-              <li>Heritage District, HD 10203</li>
-              <li><a href="mailto:enquiries@aureliapalace.com" className="hover:text-brand-gold transition-colors">enquiries@aureliapalace.com</a></li>
-              <li><a href="tel:+12345678900" className="hover:text-brand-gold transition-colors">+1 (234) 567-8900</a></li>
+          <div className="lg:col-span-2">
+            <p className="label-xs text-brand-gold/60 mb-6">Quick Links</p>
+            <ul className="space-y-3">
+              {col2.map(l => (
+                <li key={l.name}>
+                  <Link to={l.path} className="text-sm text-white/50 hover:text-white transition-colors duration-300">
+                    {l.name}
+                  </Link>
+                </li>
+              ))}
             </ul>
           </div>
 
-          {/* Social */}
-          <div>
-            <h4 className="text-lg font-serif mb-6 text-white">Follow Us</h4>
-            <ul className="space-y-4 text-sm text-gray-400">
-              <li><a href="#" className="hover:text-brand-gold transition-colors">Instagram</a></li>
-              <li><a href="#" className="hover:text-brand-gold transition-colors">Facebook</a></li>
-              <li><a href="#" className="hover:text-brand-gold transition-colors">Pinterest</a></li>
-            </ul>
-          </div>
-        </div>
-
-        <div className="border-t border-white/10 pt-8 flex flex-col md:flex-row items-center justify-between text-xs text-gray-500">
-          <p>&copy; {new Date().getFullYear()} Aurelia Palace. All rights reserved. (Fictional Venue)</p>
-          <div className="flex gap-4 mt-4 md:mt-0">
-            <Link to="/admin/login" className="hover:text-brand-gold transition-colors">Admin Login</Link>
+          <div className="lg:col-span-2">
+            <p className="label-xs text-brand-gold/60 mb-6">Address</p>
+            <address className="not-italic text-sm text-white/50 leading-loose font-light">
+              123 Royal Boulevard<br />
+              Heritage District<br />
+              HD 10203
+            </address>
           </div>
         </div>
       </Container>
-    </footer>
-  );
-};
+    </div>
+
+    {/* Bottom bar */}
+    <Container>
+      <div className="py-6 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-white/30">
+        <p>&copy; {new Date().getFullYear()} Aurelia Palace. All rights reserved. (Fictional Venue — Interview Project)</p>
+        <div className="flex items-center gap-1">
+          <span className="w-1 h-1 rounded-full bg-brand-gold/50 inline-block" />
+          <span>Crafted with precision</span>
+        </div>
+      </div>
+    </Container>
+  </footer>
+);
 
 export default Footer;

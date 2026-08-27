@@ -1,10 +1,19 @@
-import { Loader2 } from 'lucide-react';
+import { motion } from 'framer-motion';
 
-const Loader = ({ fullScreen = false, text = "Loading..." }) => {
+const Loader = ({ fullScreen = false, text = '' }) => {
   const content = (
-    <div className="flex flex-col items-center justify-center text-brand-gold gap-4">
-      <Loader2 className="animate-spin w-10 h-10" />
-      <span className="font-serif text-xl text-brand-charcoal">{text}</span>
+    <div className="flex flex-col items-center justify-center gap-6">
+      {/* Animated gold bar */}
+      <div className="relative w-16 h-px bg-brand-stone overflow-hidden">
+        <motion.div
+          className="absolute inset-y-0 left-0 w-1/2 bg-brand-gold"
+          animate={{ x: ['−100%', '300%'] }}
+          transition={{ duration: 1.4, repeat: Infinity, ease: 'easeInOut' }}
+        />
+      </div>
+      {text && (
+        <span className="label-xs text-brand-muted">{text}</span>
+      )}
     </div>
   );
 
@@ -17,7 +26,7 @@ const Loader = ({ fullScreen = false, text = "Loading..." }) => {
   }
 
   return (
-    <div className="py-20 flex items-center justify-center w-full">
+    <div className="py-24 flex items-center justify-center w-full">
       {content}
     </div>
   );

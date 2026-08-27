@@ -1,49 +1,93 @@
 import { motion } from 'framer-motion';
-import Button from '../common/Button';
+import { Link } from 'react-router-dom';
 import Container from '../common/Container';
 
-const HeroSection = () => {
-  return (
-    <div className="relative h-[90vh] min-h-[600px] flex items-center justify-center overflow-hidden -mt-20">
-      {/* Background Image with Overlay */}
-      <div className="absolute inset-0 z-0">
-        <img 
-          src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=80" 
-          alt="Aurelia Palace Grand Ballroom" 
-          className="w-full h-full object-cover"
-        />
-        <div className="absolute inset-0 bg-brand-charcoal/40" />
-        <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-transparent to-transparent" />
-      </div>
-
-      <Container className="relative z-10 text-center text-white mt-16">
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
-        >
-          <span className="text-brand-gold font-sans font-bold tracking-[0.2em] uppercase text-sm md:text-base mb-6 block">
-            Welcome to Aurelia Palace
-          </span>
-          <h1 className="text-5xl md:text-7xl lg:text-8xl font-serif mb-6 drop-shadow-lg">
-            A Destination for <br className="hidden md:block"/> Celebrations
-          </h1>
-          <p className="max-w-2xl mx-auto text-lg md:text-xl text-gray-200 mb-10 font-light drop-shadow-md">
-            Experience unparalleled luxury, meticulous service, and unforgettable moments in our premium event spaces.
-          </p>
-          
-          <div className="flex flex-col sm:flex-row items-center justify-center gap-4">
-            <Button to="/enquiry" variant="primary" size="lg" className="w-full sm:w-auto">
-              Plan Your Event
-            </Button>
-            <Button to="/spaces" variant="outline" size="lg" className="w-full sm:w-auto bg-transparent border-white text-white hover:bg-white hover:text-brand-charcoal">
-              Explore Spaces
-            </Button>
-          </div>
-        </motion.div>
-      </Container>
+const HeroSection = () => (
+  <section className="relative h-screen min-h-[640px] max-h-[1000px] flex items-center overflow-hidden">
+    {/* Full-bleed image */}
+    <div className="absolute inset-0">
+      <img
+        src="https://images.unsplash.com/photo-1519167758481-83f550bb49b3?w=1920&q=85"
+        alt="Aurelia Palace Grand Ballroom"
+        className="w-full h-full object-cover"
+        fetchpriority="high"
+      />
+      {/* Layered overlays: dark base + vignette bottom */}
+      <div className="absolute inset-0 bg-brand-charcoal/50" />
+      <div className="absolute inset-0 bg-gradient-to-t from-brand-charcoal/80 via-brand-charcoal/10 to-transparent" />
     </div>
-  );
-};
+
+    {/* Content */}
+    <Container className="relative z-10 flex flex-col justify-end h-full pb-20 md:pb-28">
+      <div className="max-w-3xl">
+        {/* Eyebrow */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.2, ease: [0.25, 0.1, 0.25, 1] }}
+          className="label-xs text-brand-gold mb-6"
+        >
+          Heritage District · Est. 2001
+        </motion.p>
+
+        {/* Headline */}
+        <motion.h1
+          initial={{ opacity: 0, y: 24 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.9, delay: 0.4, ease: [0.25, 0.1, 0.25, 1] }}
+          className="font-serif text-display-2xl text-white text-balance leading-[1.04] mb-8"
+        >
+          Where Celebrations<br className="hidden sm:block" /> Become Legacy
+        </motion.h1>
+
+        {/* Sub */}
+        <motion.p
+          initial={{ opacity: 0, y: 16 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8, delay: 0.65, ease: [0.25, 0.1, 0.25, 1] }}
+          className="text-white/65 text-base md:text-lg font-light leading-relaxed max-w-lg mb-10"
+        >
+          An extraordinary venue where timeless architecture meets impeccable service. Every detail curated for moments that endure.
+        </motion.p>
+
+        {/* CTAs */}
+        <motion.div
+          initial={{ opacity: 0, y: 12 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.7, delay: 0.85, ease: [0.25, 0.1, 0.25, 1] }}
+          className="flex flex-wrap gap-4"
+        >
+          <Link
+            to="/enquiry"
+            className="inline-flex items-center border border-brand-gold bg-brand-gold/10 text-brand-gold text-[0.65rem] font-semibold tracking-widest uppercase px-9 py-4 hover:bg-brand-gold hover:text-brand-charcoal transition-all duration-500"
+          >
+            Plan Your Event
+          </Link>
+          <Link
+            to="/spaces"
+            className="inline-flex items-center border border-white/40 text-white text-[0.65rem] font-semibold tracking-widest uppercase px-9 py-4 hover:border-white hover:bg-white/10 transition-all duration-500"
+          >
+            Explore Spaces
+          </Link>
+        </motion.div>
+      </div>
+    </Container>
+
+    {/* Bottom scroll indicator */}
+    <motion.div
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      transition={{ delay: 1.4, duration: 1 }}
+      className="absolute bottom-8 right-8 md:right-12 flex flex-col items-center gap-2 text-white/40"
+    >
+      <span className="label-xs text-[0.55rem]" style={{ writingMode: 'vertical-rl' }}>Scroll</span>
+      <motion.div
+        className="w-px h-12 bg-white/30 origin-top"
+        animate={{ scaleY: [0.3, 1, 0.3] }}
+        transition={{ duration: 2, repeat: Infinity, ease: 'easeInOut' }}
+      />
+    </motion.div>
+  </section>
+);
 
 export default HeroSection;

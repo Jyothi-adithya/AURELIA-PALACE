@@ -3,22 +3,97 @@
 @tailwind utilities;
 
 @layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
   body {
     @apply bg-brand-ivory text-brand-charcoal font-sans antialiased;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'calt' 1;
   }
-  
+
   h1, h2, h3, h4, h5, h6 {
     @apply font-serif;
+    font-feature-settings: 'kern' 1, 'liga' 1, 'dlig' 1;
+  }
+
+  ::selection {
+    background-color: #C9A96E30;
+    color: #1C1917;
+  }
+
+  img {
+    display: block;
+    max-width: 100%;
   }
 }
 
 @layer components {
-  /* Hide scrollbar for gallery filters */
-  .hide-scrollbar::-webkit-scrollbar {
-    display: none;
+  /* Eyebrow label style */
+  .label-xs {
+    @apply font-sans text-xs font-semibold tracking-widest uppercase text-brand-gold;
   }
+
+  /* Gold rule divider */
+  .gold-rule {
+    @apply w-12 h-px bg-brand-gold block;
+  }
+
+  /* Hide scrollbar */
+  .hide-scrollbar::-webkit-scrollbar { display: none; }
   .hide-scrollbar {
     -ms-overflow-style: none;
     scrollbar-width: none;
+  }
+
+  /* Skeleton shimmer */
+  .skeleton {
+    @apply bg-brand-stone/40 rounded-sm overflow-hidden relative;
+    background: linear-gradient(
+      90deg,
+      theme('colors.brand.stone / 40%') 25%,
+      theme('colors.brand.ivory-dark') 50%,
+      theme('colors.brand.stone / 40%') 75%
+    );
+    background-size: 200% 100%;
+    animation: shimmer 1.6s ease-in-out infinite;
+  }
+
+  /* Editorial image hover */
+  .img-hover {
+    @apply overflow-hidden;
+  }
+  .img-hover img {
+    @apply transition-transform duration-[800ms] ease-[cubic-bezier(0.25,0.1,0.25,1)];
+  }
+  .img-hover:hover img {
+    @apply scale-[1.04];
+  }
+
+  /* Underline link */
+  .link-underline {
+    @apply relative inline-block font-sans text-sm font-semibold tracking-widest uppercase;
+  }
+  .link-underline::after {
+    content: '';
+    @apply absolute bottom-0 left-0 h-px w-0 bg-brand-gold transition-all duration-300;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+}
+
+@layer utilities {
+  .text-balance {
+    text-wrap: balance;
+  }
+  .pb-safe {
+    padding-bottom: env(safe-area-inset-bottom);
   }
 }

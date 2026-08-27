@@ -1,12 +1,12 @@
+import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import { useFetch } from '../hooks/useFetch';
-import SEO from '../components/common/SEO';
 import { eventService } from '../services/eventService';
 import Container from '../components/common/Container';
 import SectionHeading from '../components/common/SectionHeading';
 import Loader from '../components/common/Loader';
 import ErrorState from '../components/common/ErrorState';
-import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
+import SEO from '../components/common/SEO';
 
 const EventsPage = () => {
   const { data: events, loading, error } = useFetch(eventService.getAll);
@@ -15,53 +15,56 @@ const EventsPage = () => {
   if (error) return <ErrorState message="Could not load event types." />;
 
   return (
-    <div className="bg-brand-ivory py-20 min-h-screen">
+    <div className="bg-brand-ivory min-h-screen">
       <SEO title="Event Types" description="From intimate weddings to grand corporate galas, Aurelia Palace hosts every celebration with unparalleled luxury." />
-      <Container>
-        <SectionHeading 
-          title="Celebrations We Host" 
-          subtitle="Event Types" 
-          centered 
-        />
-        
-        <div className="space-y-24 mt-16">
-          {events?.map((event, index) => (
-            <motion.div 
-              key={event.id}
-              initial={{ opacity: 0, y: 50 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              viewport={{ once: true, margin: "-100px" }}
-              transition={{ duration: 0.8 }}
-              className={`flex flex-col ${index % 2 === 1 ? 'md:flex-row-reverse' : 'md:flex-row'} gap-12 items-center`}
-            >
-              <div className="w-full md:w-1/2">
-                <Link to={`/events/${event.slug}`} className="block overflow-hidden relative aspect-[4/3] group">
-                  <img loading="lazy" 
-                    src={event.image} 
-                    alt={event.name} 
-                    className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105"
+
+      {/* Hero */}
+      <div className="pt-36 pb-20 bg-brand-charcoal text-center">
+        <motion.p initial={{ opacity: 0, y: 12 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.2 }} className="label-xs mb-4">Celebrations</motion.p>
+        <span className="gold-rule mx-auto mb-7 block" />
+        <motion.h1 initial={{ opacity: 0, y: 16 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.35 }} className="font-serif text-display-xl text-white">
+          Events We Host
+        </motion.h1>
+      </div>
+
+      {/* Alternating editorial sections */}
+      <div className="py-20 md:py-28">
+        {events?.map((event, i) => (
+          <motion.div
+            key={event.id}
+            initial={{ opacity: 0, y: 40 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            viewport={{ once: true, margin: '-80px' }}
+            transition={{ duration: 0.8, ease: [0.25, 0.1, 0.25, 1] }}
+            className="mb-24 last:mb-0"
+          >
+            <Container>
+              <div className={`grid grid-cols-1 lg:grid-cols-2 gap-12 lg:gap-20 items-center ${i % 2 === 1 ? 'lg:flex lg:flex-row-reverse' : ''}`}>
+                {/* Image */}
+                <Link to={`/events/${event.slug}`} className="group block img-hover overflow-hidden aspect-[4/3]">
+                  <img
+                    src={event.image}
+                    alt={event.name}
+                    loading="lazy"
+                    className="w-full h-full object-cover"
                   />
-                  <div className="absolute inset-0 bg-brand-charcoal/20 opacity-0 group-hover:opacity-100 transition-opacity duration-500" />
                 </Link>
-              </div>
-              <div className="w-full md:w-1/2 flex flex-col justify-center">
-                <h2 className="text-4xl font-serif text-brand-charcoal mb-6">{event.name}</h2>
-                <p className="text-gray-600 mb-8 leading-relaxed">
-                  {event.description}
-                </p>
+
+                {/* Text */}
                 <div>
-                  <Link 
-                    to={`/events/${event.slug}`}
-                    className="inline-flex items-center gap-2 text-brand-charcoal font-medium tracking-widest uppercase text-sm hover:text-brand-gold transition-colors"
-                  >
-                    Explore details <span aria-hidden="true">&rarr;</span>
+                  <p className="label-xs mb-4">0{i + 1}</p>
+                  <span className="gold-rule mb-7 block" />
+                  <h2 className="font-serif text-display-lg text-brand-charcoal mb-5">{event.name}</h2>
+                  <p className="text-brand-muted font-light leading-loose mb-8">{event.description}</p>
+                  <Link to={`/events/${event.slug}`} className="link-underline text-brand-charcoal hover:text-brand-gold">
+                    Explore Details
                   </Link>
                 </div>
               </div>
-            </motion.div>
-          ))}
-        </div>
-      </Container>
+            </Container>
+          </motion.div>
+        ))}
+      </div>
     </div>
   );
 };

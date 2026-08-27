@@ -1,58 +1,70 @@
 import { motion } from 'framer-motion';
+import { Link } from 'react-router-dom';
 import Container from '../common/Container';
-import Button from '../common/Button';
 
-const VenueIntro = () => {
-  return (
-    <section className="py-24 bg-brand-ivory overflow-hidden">
-      <Container>
-        <div className="flex flex-col lg:flex-row items-center gap-16">
-          <motion.div 
-            initial={{ opacity: 0, x: -50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8 }}
-            className="w-full lg:w-1/2"
+const fadeUp = (delay = 0) => ({
+  initial: { opacity: 0, y: 28 },
+  whileInView: { opacity: 1, y: 0 },
+  viewport: { once: true, margin: '-80px' },
+  transition: { duration: 0.8, delay, ease: [0.25, 0.1, 0.25, 1] },
+});
+
+const VenueIntro = () => (
+  <section className="py-28 md:py-36 bg-brand-ivory overflow-hidden">
+    <Container>
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-16 lg:gap-24 items-center">
+        {/* Image block */}
+        <motion.div {...fadeUp(0)} className="relative">
+          <div className="img-hover aspect-[3/4] max-w-md mx-auto lg:mx-0">
+            <img
+              src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=900&q=85"
+              alt="Aurelia Palace exterior"
+              className="w-full h-full object-cover"
+              loading="lazy"
+            />
+          </div>
+          {/* Floating stat badge */}
+          <motion.div
+            {...fadeUp(0.4)}
+            className="absolute -bottom-6 -right-0 lg:-right-8 bg-white p-6 shadow-sm border-l-2 border-brand-gold max-w-[180px]"
           >
-            <div className="relative">
-              <img loading="lazy" 
-                src="https://images.unsplash.com/photo-1464366400600-7168b8af9bc3?w=800&q=80" 
-                alt="Aurelia Palace Architecture" 
-                className="w-full aspect-[4/5] object-cover rounded-sm shadow-xl"
-              />
-              <div className="absolute -bottom-8 -right-8 w-2/3 aspect-square bg-brand-gold -z-10 rounded-sm" />
-            </div>
+            <p className="font-serif text-4xl text-brand-charcoal mb-1">25+</p>
+            <p className="text-xs text-brand-muted font-light leading-snug uppercase tracking-wide">Years of Extraordinary Events</p>
           </motion.div>
-          
-          <motion.div 
-            initial={{ opacity: 0, x: 50 }}
-            whileInView={{ opacity: 1, x: 0 }}
-            viewport={{ once: true, margin: "-100px" }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="w-full lg:w-1/2"
-          >
-            <span className="text-brand-gold font-sans font-bold tracking-widest uppercase text-sm mb-4 block">
-              The Heritage
-            </span>
-            <h2 className="text-4xl md:text-5xl font-serif text-brand-charcoal mb-6 leading-tight">
-              Where Elegance Meets Extraordinary
-            </h2>
-            <div className="space-y-6 text-gray-600 mb-10 text-lg font-light leading-relaxed">
-              <p>
-                Nestled in the heart of the heritage district, Aurelia Palace stands as a testament to timeless architecture and modern luxury. 
-              </p>
-              <p>
-                For over two decades, we have been the backdrop to life's most precious moments, offering an ambiance that whispers sophistication and spaces that roar with grandeur. Every archway, chandelier, and garden path has been curated to make your event truly extraordinary.
-              </p>
-            </div>
-            <Button to="/venue" variant="outline">
-              Discover Our Story
-            </Button>
+          {/* Gold accent block */}
+          <div className="absolute -z-10 -bottom-4 -left-4 w-48 h-64 bg-brand-stone/30" />
+        </motion.div>
+
+        {/* Text block */}
+        <div className="lg:pt-8">
+          <motion.p {...fadeUp(0.1)} className="label-xs mb-4">The Heritage</motion.p>
+          <span className="gold-rule mb-8 block" />
+
+          <motion.h2 {...fadeUp(0.2)} className="font-serif text-display-lg text-brand-charcoal mb-8 text-balance">
+            Where Elegance Meets Extraordinary
+          </motion.h2>
+
+          <motion.div {...fadeUp(0.3)} className="space-y-5 text-brand-muted font-light leading-loose text-[1.0625rem] mb-10">
+            <p>
+              Nestled in the heart of the heritage district, Aurelia Palace stands as a testament to timeless architecture and modern luxury.
+            </p>
+            <p>
+              For over two decades, we have been the backdrop to life's most precious moments — offering an ambiance that whispers sophistication and spaces that roar with grandeur. Every archway, chandelier, and garden path has been curated to make your event extraordinary.
+            </p>
+          </motion.div>
+
+          <motion.div {...fadeUp(0.4)}>
+            <Link
+              to="/venue"
+              className="link-underline text-brand-charcoal hover:text-brand-gold"
+            >
+              Discover Our Story →
+            </Link>
           </motion.div>
         </div>
-      </Container>
-    </section>
-  );
-};
+      </div>
+    </Container>
+  </section>
+);
 
 export default VenueIntro;
